@@ -13,8 +13,8 @@ app.listen(8080);
 
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
-// Keep url private
-const mongodb = "url";
+// Keep url private in .env
+const mongodb = process.env.URL;
 const main = async () => {
   try {
     await mongoose.connect(mongodb);
