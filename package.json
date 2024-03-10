@@ -1,0 +1,25 @@
+{
+  "name": "mdn-locallibrary",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "devstart": "nodemon .bin/www",
+    "serverstart": "DEBUG=express-MDN_LocalLibrary:* npm run devstart"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "^3.1.9",
+    "express": "^4.18.3",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "express-async-handler": "^1.2.0",
+    "nodemon": "^3.1.0",
+    "prettier": "^3.2.5"
+  }
+}
