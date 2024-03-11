@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <% if (bookinstance_list.length) { %>
+      <ul>
+        <% bookinstance_list.forEach(book => { %>
+          <li>
+            <a href=<%= book.url %>>
+            <%= book.book.title %> : <%= book.imprint %>
+            </a>
+            <% if (book.status === "Available") { %>
+              <span class="text-success"><%= book.status %></span>
+            <% } else if (book.status === "Maintenance") { %>
+              <span class="text-danger"><%= book.status %></span>
+            <% } else { %>
+              <span class="text-warning"><%= book.status %></span>
+            <% } %>
+            <% if (book.status !== "Available") { %>
+              <span>(Due: <%= book.due_back %>)</span>
+            <% } %>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No book copies.</p>
+    <% } %>
+  </body>
+</html>
