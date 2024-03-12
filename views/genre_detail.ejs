@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+</head>
+<body>
+  <h1><%= title %></h1>
+    <h4>Books</h4>
+    <% if (genre_books.length) { %>
+      <% genre_books.forEach(book => { %>
+        <a href=<%= book.url %>><%= book.title %></a>
+        <p><%= book.summary %></p>
+      <% }) %>
+    <% } else { %>
+      <p>This genre has no books.</p>
+    <% } %>
+</body>
+</html>
