@@ -5,17 +5,36 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to Local Library!</p>
-    <p>
-      The library has the following record counts: 
-      <ul>
-        <li>Books: <%= book_count %></li>
-        <li>Copies: <%= book_instance_count %></li>
-        <li>Copies Available: <%= book_instance_available_count %></li>
-        <li>Authors: <%= author_count %></li>
-        <li>Genres: <%= genre_count %></li>
-      </ul>
-    </p>
+    <div class="container">
+      <div class="col-sm-2">
+        <ul class="side-bar-nav">
+          <li><a href="/catalog">Home</a></li>
+          <li><a href="/catalog/books">All books</a></li>
+          <li><a href="/catalog/authors">All authors</a></li>
+          <li><a href="/catalog/genres">All genres</a></li>
+          <li><a href="/catalog/bookinstances">All book-instances</a></li>
+          <li><hr /></li>
+          <li><a href="catalog/author/create">Create new author</a></li>
+          <li><a href="catalog/genre/create">Create new genre</a></li>
+          <li><a href="catalog/book/create">Create new book</a></li>
+          <li><a href="catalog/bookinstances/create">Create new book instance</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h1><%= title %></h1>
+        <p>Welcome to Local Library!</p>
+        <p>
+          The library has the following record counts: 
+          <ul>
+            <li>Books: <%= book_count %></li>
+            <li>Copies: <%= book_instance_count %></li>
+            <li>Copies Available: <%= book_instance_available_count %></li>
+            <li>Authors: <%= author_count %></li>
+            <li>Genres: <%= genre_count %></li>
+          </ul>
+        </p>
+      </div>
+    </div>  
   </body>
 </html>

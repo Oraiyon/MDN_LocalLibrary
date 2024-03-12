@@ -3,28 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
   <title><%= title %></title>
 </head>
 <body>
-  <h1>Title: <%= title %></h1>
-  <p>Author: <a href=<%= book.author.url %>><%= book.author.name %></a></p>
-  <p>Summary: <%= book.summary %></p>
-  <p>ISBN: <%= book.isbn %></p>
-  <p>Genre: 
-    <% book.genre.forEach((genre, index) => { %>
-      <a href=<%= genre.url %>><%= genre.name %></a>
-      <% if (index < book.genre.length - 1) { %>
-        <span>,</span>
-      <% } %>
-    <% }) %>
-  </p>
-  <h4>Copies</h4>
-  <% book_instances.forEach(book => { %>
-    <p><%= book.status %></p>
-    <% if (book.status !== "Available") { %>
-      <p>Due back: <%= book.due_back_formatted %></p>
-    <% } %>
-    <p>Id: <a href=<%= book._id %>></a><%= book._id %></p>
-  <% }) %>
+  <div class="container">
+    <div class="col-sm-2">
+      <ul class="side-bar-nav">
+        <li><a href="/catalog">Home</a></li>
+        <li><a href="/catalog/books">All books</a></li>
+        <li><a href="/catalog/authors">All authors</a></li>
+        <li><a href="/catalog/genres">All genres</a></li>
+        <li><a href="/catalog/bookinstances">All book-instances</a></li>
+        <li><hr /></li>
+        <li><a href="catalog/author/create">Create new author</a></li>
+        <li><a href="catalog/genre/create">Create new genre</a></li>
+        <li><a href="catalog/book/create">Create new book</a></li>
+        <li><a href="catalog/bookinstances/create">Create new book instance</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h1>Title: <%= title %></h1>
+      <p>Author: <a href=<%= book.author.url %>><%= book.author.name %></a></p>
+      <p>Summary: <%= book.summary %></p>
+      <p>ISBN: <%= book.isbn %></p>
+      <p>Genre: 
+        <% book.genre.forEach((genre, index) => { %>
+          <a href=<%= genre.url %>><%= genre.name %></a>
+          <% if (index < book.genre.length - 1) { %>
+            <span>,</span>
+          <% } %>
+        <% }) %>
+      </p>
+      <h4>Copies</h4>
+      <% book_instances.forEach(book => { %>
+        <p><%= book.status %></p>
+        <% if (book.status !== "Available") { %>
+          <p>Due back: <%= book.due_back_formatted %></p>
+        <% } %>
+        <p>Id: <a href=<%= book._id %>></a><%= book._id %></p>
+      <% }) %>
+    </div>
+  </div>
 </body>
 </html>

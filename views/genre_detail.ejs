@@ -3,10 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
   <title><%= title %></title>
 </head>
 <body>
-  <h1><%= title %></h1>
+  <div class="container">
+    <div class="col-sm-2">
+      <ul class="side-bar-nav">
+        <li><a href="/catalog">Home</a></li>
+        <li><a href="/catalog/books">All books</a></li>
+        <li><a href="/catalog/authors">All authors</a></li>
+        <li><a href="/catalog/genres">All genres</a></li>
+        <li><a href="/catalog/bookinstances">All book-instances</a></li>
+        <li><hr /></li>
+        <li><a href="catalog/author/create">Create new author</a></li>
+        <li><a href="catalog/genre/create">Create new genre</a></li>
+        <li><a href="catalog/book/create">Create new book</a></li>
+        <li><a href="catalog/bookinstances/create">Create new book instance</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h1><%= title %></h1>
     <h4>Books</h4>
     <% if (genre_books.length) { %>
       <% genre_books.forEach(book => { %>
@@ -16,5 +34,7 @@
     <% } else { %>
       <p>This genre has no books.</p>
     <% } %>
+    </div>
+  </div>  
 </body>
 </html>
