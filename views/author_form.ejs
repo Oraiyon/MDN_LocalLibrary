@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <title><%= title  %></title>
+</head>
+<body>
+  <div class="container">
+    <div class="col-sm-2">
+      <ul class="side-bar-nav">
+        <li><a href="/catalog">Home</a></li>
+        <li><a href="/catalog/books">All books</a></li>
+        <li><a href="/catalog/authors">All authors</a></li>
+        <li><a href="/catalog/genres">All genres</a></li>
+        <li><a href="/catalog/bookinstances">All book-instances</a></li>
+        <li><hr /></li>
+        <li><a href="/catalog/author/create">Create new author</a></li>
+        <li><a href="/catalog/genre/create">Create new genre</a></li>
+        <li><a href="/catalog/book/create">Create new book</a></li>
+        <li><a href="/catalog/bookinstances/create">Create new book instance</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h1><%= title  %></h1>
+      <form action="" method="post">
+        <div class="container-vertical">
+          <div class="container-vertical">
+            <label for="first_name">First Name: </label>
+            <input 
+              type="text" 
+              id="first_name" 
+              placeholder="First Name" 
+              name="first_name" 
+              required 
+              value=<%= author === undefined ? "" : author.first_name %>>
+          </div>
+          <div class="container-vertical">
+            <label for="family_name">Family Name: </label>
+            <input 
+              type="text" 
+              id="family_name" 
+              placeholder="Family Name" 
+              name="family_name" 
+              required 
+              value=<%= author === undefined ? "" : author.family_name %>>
+          </div>
+          <div class="container-vertical">
+            <label for="date_of_birth">Date of birth: </label>
+            <input 
+              type="date" 
+              id="date_of_birth"
+              name="date_of_birth" 
+              required 
+              value=<%= author === undefined ? "" : author.date_of_birth %>>
+          </div>
+          <div class="container-vertical">
+            <label for="date_of_death">Date of death: </label>
+            <input 
+              type="date" 
+              name="date_of_death" 
+              id="date_of_death"
+              required
+              value=<%= author === undefined ? "" : author.date_of_death %>>
+          </div>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+      <% if (errors) { %>
+        <ul>
+          <% errors.forEach(err => { %>
+            <li><%= err.msg %></li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </div>
+  </div>  
+</body>
+</html>
