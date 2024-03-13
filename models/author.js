@@ -10,6 +10,7 @@ const AuthorSchema = new Schema({
   date_of_death: { type: Date }
 });
 
+// MUST NOT be an => () because you are using this.
 AuthorSchema.virtual("name").get(function () {
   let fullName = "";
   if (this.first_name && this.family_name) {
@@ -17,7 +18,7 @@ AuthorSchema.virtual("name").get(function () {
   }
   return fullName;
 });
-// MUST NOT be an => () because you are using this.
+
 AuthorSchema.virtual("url").get(function () {
   return `/catalog/author/${this._id}`;
 });
