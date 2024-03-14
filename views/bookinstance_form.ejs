@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="col-sm-2">
+        <ul class="side-bar-nav">
+          <li><a href="/catalog">Home</a></li>
+          <li><a href="/catalog/books">All books</a></li>
+          <li><a href="/catalog/authors">All authors</a></li>
+          <li><a href="/catalog/genres">All genres</a></li>
+          <li><a href="/catalog/bookinstances">All book-instances</a></li>
+          <li><hr /></li>
+          <li><a href="/catalog/author/create">Create new author</a></li>
+          <li><a href="/catalog/genre/create">Create new genre</a></li>
+          <li><a href="/catalog/book/create">Create new book</a></li>
+          <li><a href="/catalog/bookinstance/create">Create new book instance</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h1><%= title %></h1>
+        <form action="" method="post">
+          <div class="container-vertical">
+            <label for="book">Book: </label>
+            <select name="book" id="book" required>
+              <option value="">--Select a book--</option>
+              <% book_list.forEach(book => { %>
+                <% if (selected_book === book._id.toString()) { %>
+                  <option value=<%= book._id %> selected><%= book.title %></option>
+                <% } else { %>
+                  <option value=<%= book._id %>><%= book.title %></option>
+                <% } %>
+              <% }) %>
+            </select>
+          </div>
+          <div class="container-vertical">
+            <label for="imprint">Imprint: </label>
+            <input 
+              type="text"
+              placeholder="Publisher and date information"
+              name="imprint"
+              required
+              value=<%= bookinstance === undefined ? "" : bookinstance.imprint %>>
+          </div>
+          <div class="container-vertical">
+            <label for="due_back">Date when book available: </label>
+            <input 
+              type="date"
+              name="due_back"
+              value=<%= bookinstance === undefined ? "" : bookinstance.due_back_yyyy_mm_dd %>>
+          </div>
+          <div class="container-vertical">
+            <label for="status">Status: </label>
+            <select name="status" id="status">
+              <option value="">--Select a status--</option>
+              <% status_options.forEach(status => { %>
+                <% if (bookinstance === undefined || bookinstance.status !== status) { %>
+                  <option value=<%= status %>><%= status %></option>
+                <% } else { %>
+                  <option value=<%= status %> selected><%= status %></option>
+                <% } %>
+              <% }) %>
+            </select>
+          </div>
+          <button>Submit</button>
+        </form>
+      </div>
+      <% if (errors) { %>
+        <ul>
+          <% errors.forEach(err => { %>
+           <li><%= err.msg %></li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </div>
+  </body>
+</html>
