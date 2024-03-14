@@ -36,9 +36,10 @@ exports.genre_create_get = (req, res, next) => {
 // Handle Genre create on POST.
 // Middleware using [] stacking
 exports.genre_create_post = [
-  body("name", "Genre name must contain at least 3 characters")
+  body("name")
     .trim()
     .isLength({ min: 3 })
+    .withMessage("Genre name must contain at least 3 characters")
     .escape(),
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
