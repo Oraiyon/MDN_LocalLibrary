@@ -44,6 +44,8 @@
         <% } %>
         <p>Id: <a href=<%= book._id %>></a><%= book._id %></p>
       <% }) %>
+      <a href=<%= book.url+"/delete" %>>Delete Book</a>
+      <a href=<%= book.url+"/update" %>>Update Book</a>
     </div>
   </div>
 </body>
