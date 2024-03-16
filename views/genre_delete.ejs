@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="col-sm-2">
+        <ul class="side-bar-nav">
+          <li><a href="/catalog">Home</a></li>
+          <li><a href="/catalog/books">All books</a></li>
+          <li><a href="/catalog/authors">All authors</a></li>
+          <li><a href="/catalog/genres">All genres</a></li>
+          <li><a href="/catalog/bookinstances">All book-instances</a></li>
+          <li><hr /></li>
+          <li><a href="/catalog/author/create">Create new author</a></li>
+          <li><a href="/catalog/genre/create">Create new genre</a></li>
+          <li><a href="/catalog/book/create">Create new book</a></li>
+          <li><a href="/catalog/bookinstance/create">Create new book instance</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h1><%= title %></h1>
+        <% if (allBooks.length > 0) { %>
+          <p>You must delete these books before deleting the <%= genre.name %> genre.</p>
+          <% allBooks.forEach(book => { %>
+            <h3><%= book.title %></h3>
+            <p><%= book.author.name %></p>
+            <p> <%= book.summary %></p>
+          <% }) %>
+        <% } else { %>
+          <p>Are you sure you want to delete the <%= genre.name %> genre?</p>
+          <form action="" method="post">
+            <input 
+            type="hidden"
+            name="genreid"
+            value=<%= genre._id %>>
+            <button>Yes</button>
+          </form>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>
