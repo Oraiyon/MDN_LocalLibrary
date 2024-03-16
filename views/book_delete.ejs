@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/public/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
     <title><%= title %></title>
   </head>
   <body>
@@ -23,7 +23,26 @@
         </ul>
       </div>
 
-      <div></div>
+      <div>
+        <h1><%= title %></h1>
+        <% if (allBookInstances.length > 0) { %>
+          <p>Must delete all instances of <%= book.title %> before deleting book.</p>
+          <% allBookInstances.forEach(book => { %>
+            <a href=<%= book.url %>><%= book.book.title %></a>
+            <p><%= book.status %></p>
+            <p><%= book.due_back_formatted %></p>
+          <% }) %>
+        <% } else { %>
+          <form action="" method="post">
+            <p>Are you sure you want to delete <%= book.title %>?</p>
+            <input 
+            type="hidden"
+            name="bookid"
+            value=<%= book._id %>>
+            <button>Delete</button>
+          </form>
+        <% } %>
+      </div>
     </div>
   </body>
 </html>

@@ -120,12 +120,21 @@ exports.book_create_post = [
 
 // Display book delete form on GET.
 exports.book_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Book delete GET");
+  const [book, allBookInstances] = await Promise.all([
+    Book.findById(req.params.id).populate("author").populate("genre").exec(),
+    BookInstance.find({ book: req.params.id }).populate("book")
+  ]);
+  res.render("book_delete", {
+    title: "Delete Book",
+    book: book,
+    allBookInstances: allBookInstances
+  });
 });
 
 // Handle book delete on POST.
 exports.book_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Book delete POST");
+  await Book.findByIdAndDelete(req.body.bookid);
+  res.redirect("/catalog/books");
 });
 
 // Display book update form on GET.
