@@ -3,6 +3,7 @@ const Book = require("../models/book");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const author = require("../models/author");
+const book = require("../models/book");
 
 // Display list of all BookInstances.
 exports.bookinstance_list = asyncHandler(async (req, res, next) => {
@@ -56,7 +57,7 @@ exports.bookinstance_create_post = [
     });
     if (!errors.isEmpty()) {
       const allBooks = await Book.find({}, { title: 1 }).exec();
-      res.render({
+      res.render("bookinstance_form", {
         title: "Create BookInstance",
         book_list: allBooks,
         selected_book: bookInstance.book._id,
@@ -89,10 +90,37 @@ exports.bookinstance_delete_post = asyncHandler(async (req, res, next) => {
 
 // Display BookInstance update form on GET.
 exports.bookinstance_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: BookInstance update GET");
+  const bookInstance = await BookInstance.findById(req.params.id).populate("book").exec();
+  res.render("bookinstance_update", {
+    title: "Update Instance",
+    book_instance: bookInstance,
+    errors: "",
+    status_options: ["Maintenance", "Available", "Loaned", "Reserved"]
+  });
 });
 
 // Handle bookinstance update on POST.
-exports.bookinstance_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: BookInstance update POST");
-});
+exports.bookinstance_update_post = [
+  body("imprint", "Imprint must be specified").trim().isLength({ min: 1 }).escape(),
+  body("status").escape(),
+  body("due_back", "Invalid date").optional({ value: "falsy" }).isISO8601().toDate(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    const bookInstance = await BookInstance.findById(req.params.id).populate("book").exec();
+    if (!errors.isEmpty()) {
+      res.render("bookinstance_update", {
+        title: "Update Instance",
+        book_instance: bookInstance,
+        errors: errors.array(),
+        status_options: ["Maintenance", "Available", "Loaned", "Reserved"]
+      });
+      return;
+    } else {
+      bookInstance.imprint = req.body.imprint;
+      bookInstance.status = req.body.status;
+      bookInstance.due_back = req.body.due_back;
+      await bookInstance.save();
+      res.redirect(bookInstance.url);
+    }
+  })
+];
