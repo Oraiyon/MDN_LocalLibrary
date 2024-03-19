@@ -12,7 +12,8 @@ const usersRouter = require("./routes/users");
 const catalogRouter = require("./routes/catalog");
 
 const app = express();
-app.listen(8080);
+const port = process.env.PORT || 8080;
+app.listen(port, "0.0.0.0");
 
 // Install dotenv to access .env
 const dotenv = require("dotenv");
