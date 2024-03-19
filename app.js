@@ -13,7 +13,7 @@ const catalogRouter = require("./routes/catalog");
 
 const app = express();
 const port = process.env.PORT || 8080;
-app.listen(port, "0.0.0.0");
+app.listen(port);
 
 // Install dotenv to access .env
 const dotenv = require("dotenv");
