@@ -106,10 +106,37 @@ exports.author_delete_post = asyncHandler(async (req, res, next) => {
 
 // Display Author update form on GET.
 exports.author_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Author update GET");
+  const author = await Author.findById(req.params.id).exec();
+  res.render("author_update", {
+    title: "Update Author",
+    author: author,
+    errors: ""
+  });
 });
 
 // Handle Author update on POST.
-exports.author_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Author update POST");
-});
+exports.author_update_post = [
+  body("first_name", "First name must be specified").trim().isLength({ min: 1 }).escape(),
+  body("family_name", "Family name must be specified").trim().isLength({ min: 1 }).escape(),
+  body("date_of_birth", "Invalid date of birth").optional({ values: "falsy" }).isISO8601().toDate(),
+  body("date_of_death", "Invalid date of death").optional({ values: "falsy" }).isISO8601().toDate(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    const author = await Author.findById(req.params.id).exec();
+    if (!errors.isEmpty()) {
+      res.render("author_update", {
+        title: "Update Author",
+        author: author,
+        errors: errors.array()
+      });
+      return;
+    } else {
+      author.first_name = req.body.first_name;
+      author.family_name = req.body.family_name;
+      author.date_of_birth = req.body.date_of_birth;
+      author.date_of_death = req.body.date_of_death;
+      await author.save();
+      res.redirect(author.url);
+    }
+  })
+];
