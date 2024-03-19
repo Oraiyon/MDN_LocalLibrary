@@ -18,7 +18,7 @@ dotenv.config();
 const app = express();
 // Listens to railway port OR 8080
 const port = process.env.PORT || 8080;
-app.listen(port);
+app.listen(port, "0.0.0.0");
 
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
