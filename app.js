@@ -16,8 +16,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000;
-app.listen(port, "0.0.0.0", function () {});
+const port = 8080;
+app.listen(port);
 
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
