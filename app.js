@@ -11,15 +11,12 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const catalogRouter = require("./routes/catalog");
 
+const app = express();
+app.listen(8080);
+
 // Install dotenv to access .env
 const dotenv = require("dotenv");
 dotenv.config();
-
-const app = express();
-// Listens to railway port OR 8080
-const port = process.env.PORT || 8080;
-app.listen(port, "0.0.0.0");
-
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 // Keep url private in .env
@@ -44,6 +41,7 @@ const limiter = RateLimit({
   max: 20
 });
 app.use(limiter);
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
