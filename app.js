@@ -17,7 +17,7 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 8080;
-app.listen(port, "0.0.0.0");
+app.listen(port);
 
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
