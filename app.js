@@ -24,7 +24,8 @@ mongoose.set("strictQuery", false);
 // Keep url private in .env
 const main = async () => {
   try {
-    await mongoose.connect(process.env.URL);
+    // Railway variable
+    await mongoose.connect(process.env.MONGODB_URI);
   } catch (err) {
     console.log(err);
   }
