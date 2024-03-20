@@ -15,10 +15,11 @@ exports.index = asyncHandler(async (req, res, next) => {
   //     Author.countDocuments().exec(),
   //     Genre.countDocuments().exec()
   //   ]);
+  const numBooks = await Book.countDocuments().exec();
 
   res.render("index", {
-    title: "Local Library Home"
-    // book_count: numBooks,
+    title: "Local Library Home",
+    book_count: numBooks
     // book_instance_count: numBookInstances,
     // book_instance_available_count: numAvailableBookInstances,
     // author_count: numAuthors,

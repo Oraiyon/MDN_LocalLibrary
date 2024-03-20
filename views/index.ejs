@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <title><%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <div class="container">
@@ -23,7 +23,14 @@
 
       <div>
         <h1><%= title %></h1>
+        <p>Welcome to Local Library!</p>
+        <p>
+          The library has the following record counts: 
+          <ul>
+            <li>Books: <%= book_count %></li>
+          </ul>
+        </p>
       </div>
-    </div>
+    </div>  
   </body>
 </html>
